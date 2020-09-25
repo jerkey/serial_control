@@ -1,8 +1,11 @@
+#define PRECHARGE       5
+#define CONTACTOR       6
+#define PRECHARGE_TIME  3000
 void setup() {
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
+  pinMode(PRECHARGE, OUTPUT); // precharge
+  pinMode(CONTACTOR, OUTPUT); // contactors
   Serial.begin(9600);
-  Serial.println('lksjdflskdjfsdl fkjs dlf');
+  Serial.println("control pins 5 and 6");
 }
 
 void loop() {
@@ -12,17 +15,15 @@ void loop() {
     Serial.println(a);
 
     if(a == '0') {
-        digitalWrite(2, LOW);
-        digitalWrite(3, LOW);
+      Serial.println("PRECHARGE and CONTACTOR OFF");
+      digitalWrite(PRECHARGE, LOW);
+      digitalWrite(CONTACTOR, LOW);
     } else if(a == '1') {
-        digitalWrite(2, HIGH);
-        digitalWrite(3, LOW);
-    } else if(a == '2') {
-        digitalWrite(2, LOW);
-        digitalWrite(3, HIGH);
-    } else if(a == '3') {
-        digitalWrite(2, HIGH);
-        digitalWrite(3, HIGH);
+      digitalWrite(PRECHARGE, HIGH);
+      Serial.print("PRECHARGE ON ... "+String(PRECHARGE_TIME));
+      delay(PRECHARGE_TIME);
+      digitalWrite(CONTACTOR, HIGH);
+      Serial.println("CONTACTOR ON");
     }
   }
 }
