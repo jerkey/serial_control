@@ -12,7 +12,8 @@ void setup() {
 void loop() {
   int32_t a = 0;
   a = Serial.parseInt();
-  Serial.println(a);
+  if (a != 0) Serial.println(a);
+  Serial.println("PRECHARGE " + String(digitalRead(PRECHARGE))+"	CONTACTOR " + String(digitalRead(CONTACTOR)));
 
   if (a == 8675309) {
     digitalWrite(PRECHARGE, HIGH);
